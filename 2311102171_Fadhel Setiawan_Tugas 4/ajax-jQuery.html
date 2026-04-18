@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-4.0.0.js"
+        integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2>The jQuery AJAX</h2>
+    <p id="demo">Let Ajax change this text.</p>
+    <button type="button" id="changeBtn">Change Content</button> 
+    <script>
+        $(document).ready(function(){
+            $("#changeBtn").click(function(){
+                $.ajax({
+                    url: "ajax_info.txt",
+                    type: "GET",
+                    data: {
+                        id: 123,
+                        name: "John Doe"
+                    },
+                    dataType: "html",
+                    timeout: 5000,
+                    success:function(result){
+                        $("#demo").html(result);
+                    },
+                    error:function(xhr, status, error){
+                        $("#demo").html("Error: " + error);
+                    },
+                    complete: function(xhr, status) { 
+                        console.log("Request completed with status: " + status);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
